@@ -16,6 +16,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_IAM_ROLE_ARN}}
+          aws-region: ap-northeast-1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Apply
+        run: terraform -chdir=./terraform apply -auto-approve
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -29,12 +41,6 @@ jobs:
           npm ci
           npm run build
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.AWS_IAM_ROLE_ARN}}
-          aws-region: ap-northeast-1
-
       - name: Deploy to S3
         run: |
-          aws s3 sync frontend/out s3://my-gitops-test-bucket-20250803 --delete
+          aws s3 sync ./frontend/out s3://my-gitops-test-bucket-20250803 --delete
