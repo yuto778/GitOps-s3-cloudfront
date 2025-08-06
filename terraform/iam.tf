@@ -59,13 +59,16 @@ resource "aws_iam_policy" "s3_access" {
           "s3:GetBucketPublicAccessBlock",
           "s3:PutBucketPublicAccessBlock",
           "s3:GetBucketVersioning",
-          "s3:ListBucket"
+          "s3:ListBucket",
+          "s3:GetBucketTagging",
+          "s3:PutBucketTagging"
         ]
         Resource = [
           "arn:aws:s3:::my-gitops-test-bucket-20250803",
           "arn:aws:s3:::terraform-state-215ad062"
         ]
       }
+
       ,
       {
         Sid    = "S3ObjectManagement"
