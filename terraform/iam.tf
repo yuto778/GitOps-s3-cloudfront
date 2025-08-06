@@ -53,9 +53,45 @@ resource "aws_iam_policy" "s3_access" {
         Action = [
             "dynamodb:GetItem",
             "dynamodb:PutItem",
-            "dynamodb:DeleteItem"
+            "dynamodb:DeleteItem",
+            "dynamodb:DescribeTable"
         ]
         Resource = "arn:aws:dynamodb:ap-northeast-1:048588986880:table/terraform-lock-215ad062"
+      },
+      {
+        Sid    = "TerraformStateAccess"
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject",
+          "s3:ListBucket",
+          "s3:GetBucketVersioning",
+          "s3:GetBucketLocation"
+        ]
+        Resource = [
+          "arn:aws:s3:::terraform-state-215ad062",
+          "arn:aws:s3:::terraform-state-215ad062/*"
+        ]
+      },
+      {
+        Sid    = "CloudFrontAccess"
+        Effect = "Allow"
+        Action = [
+          "cloudfront:*"
+        ]
+        Resource = "*"
+      },
+      {
+        Sid    = "IAMAccess"
+        Effect = "Allow"
+        Action = [
+          "iam:GetRole",
+          "iam:GetRolePolicy",
+          "iam:ListRolePolicies",
+          "iam:ListAttachedRolePolicies"
+        ]
+        Resource = "*"
       }
     ]
   })

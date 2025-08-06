@@ -25,8 +25,11 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Teffaform Init
+      - name: Terraform Init
         run: terraform -chdir=./terraform init
+
+      - name: Terraform Plan
+        run: terraform -chdir=./terraform plan
 
       - name: Terraform Apply
         run: terraform -chdir=./terraform apply -auto-approve
