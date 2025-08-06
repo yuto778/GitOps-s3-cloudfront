@@ -41,7 +41,14 @@ resource "aws_iam_policy" "s3_access" {
         Effect = "Allow"
         Action = [
           "s3:CreateBucket",
-          "s3:DeleteBucket",
+          "s3:DeleteBucket"
+        ]
+        Resource = "*"
+      },
+      {
+        Sid    = "S3BucketConfiguration"
+        Effect = "Allow"
+        Action = [
           "s3:GetBucketLocation",
           "s3:GetBucketPolicy",
           "s3:PutBucketPolicy",
@@ -58,7 +65,8 @@ resource "aws_iam_policy" "s3_access" {
           "arn:aws:s3:::my-gitops-test-bucket-20250803",
           "arn:aws:s3:::terraform-state-215ad062"
         ]
-      },
+      }
+      ,
       {
         Sid    = "S3ObjectManagement"
         Effect = "Allow"
