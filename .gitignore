@@ -1,3 +1,11 @@
 .terraform
 
 .docs/
+
+node_modules/
+
+.next/
+
+out/
+
+.env.local
