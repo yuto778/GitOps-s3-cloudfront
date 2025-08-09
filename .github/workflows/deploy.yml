@@ -30,13 +30,13 @@ jobs:
 
       - name: Terraform Plan
         run: |
-          cd terraform
-          terraform plan -target=aws_s3_bucket.website -target=aws_s3_bucket_website_configuration.website -target=aws_s3_bucket_public_access_block.website -target=aws_s3_bucket_policy.website
+          cd terraform/infrastracture
+          terraform plan
 
       - name: Terraform Apply
         run: |
-          cd terraform  
-          terraform apply -auto-approve -target=aws_s3_bucket.website -target=aws_s3_bucket_website_configuration.website -target=aws_s3_bucket_public_access_block.website -target=aws_s3_bucket_policy.website
+          cd terraform/infrastracture  
+          terraform apply -auto-approve
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
