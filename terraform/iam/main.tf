@@ -61,7 +61,9 @@ resource "aws_iam_policy" "s3_access" {
           "s3:GetBucketVersioning",
           "s3:ListBucket",
           "s3:GetBucketTagging",
-          "s3:PutBucketTagging"
+          "s3:PutBucketTagging",
+          "s3:PutBucketAcl",
+          "s3:GetBucketAcl"
         ]
         Resource = [
           "arn:aws:s3:::my-gitops-test-bucket-20250803",
