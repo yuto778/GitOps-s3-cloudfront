@@ -17,7 +17,7 @@ on:
 
 jobs:
   build-and-deploy:
-    if: github.event.inputs.destroy != 'yes'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
